@@ -1,8 +1,14 @@
 import git
-from git_contributions_importer.Importer import Importer
+from src.Importer import Importer
+import os
+
+def list_repos(parent_dir):
+    return [git.Repo(os.path.join(parent_dir, path)) for path in os.listdir(parent_dir) if os.path.isdir(os.path.join(parent_dir, path))]
+
 
 repos = [
-    git.Repo("/home/milesq/Desktop/dlx1-p7-content-hierarchy")
+    *list_repos("/home/milesq/Desktop/dev/current/bbcs"),
+    *list_repos("/home/milesq/Desktop/dev/current/uktv-compliance")
 ]
 
 mock_repo = git.Repo("./other-git-servers-mock")
